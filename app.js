@@ -1,14 +1,14 @@
 'use strict'
 
 var catalog  = document.getElementById('catalog');
-var allcatalog  = [];
+var allCatalog  = [];
 
 function Catalog (name,filetype) {
   this.filepath = `img/${name}.jpg` || `img/${name}.png` ||`img/${name}.gif`;
   this.name = name;
   this.filetype= filetype;
   this.views = 0;
-  allcatalog.push(this);
+  allCatalog.push(this);
 }
 
 new Catalog('bag');
@@ -35,17 +35,17 @@ new Catalog('wine-glass');
 
 
 function showRandomCatalog() {
-  var random = Math.floor(Math.random() * allcatalog.length);
-  Catalog.src = allcatalog[random].filepath;
-  Catalog.alt = allcatalog[random].name;
-  Catalog.title = allcatalog[random].name;
-  allcatalog[random].views++;
-  console.log('current catalog, ', allcatalog[random]);
+  var random = Math.floor(Math.random() * allCatalog.length);
+  catalog.src = allCatalog[random].filepath;
+  catalog.alt = allCatalog[random].name;
+  catalog.title = allCatalog[random].name;
+  allCatalog[random].views++;
+  console.log('current catalog,', allCatalog[random]);
 }
 
 showRandomCatalog();
 
-Catalog.addEventListener('click', handleClick);
+catalog.addEventListener('click', handleClick);
 function handleClick(event) {
   console.log('target, ', event.target);
   showRandomCatalog();
