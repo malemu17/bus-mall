@@ -10,3 +10,9 @@
     body {
       background-color:#874642;
     }
+
+    img {
+      display: block;
+      width:auto;
+      height: 270px;
+    }
