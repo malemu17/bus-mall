@@ -3,7 +3,7 @@
 var catalog  = document.getElementById('catalog');
 var allCatalog  = [];
 
-function Catalog (name,filetype) {
+function Catalog (name,filetype,filepath) {
   this.filepath = `img/${name}.jpg` || `img/${name}.png` ||`img/${name}.gif`;
   this.name = name;
   this.filetype= filetype;
@@ -47,6 +47,12 @@ showRandomCatalog();
 
 catalog.addEventListener('click', handleClick);
 function handleClick(event) {
-  console.log('target, ', event.target);
+  
+    console.log('target, ', event.target);
+  
   showRandomCatalog();
+  
 }
+
+
+
