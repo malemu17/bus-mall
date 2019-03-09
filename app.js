@@ -1,58 +1,177 @@
 'use strict'
 
-var catalog  = document.getElementById('catalog');
-var allCatalog  = [];
+//  main array
+var allProduct = [];
 
-function Catalog (name,filetype,filepath) {
-  this.filepath = `img/${name}.jpg` || `img/${name}.png` ||`img/${name}.gif`;
+var viewed = [];
+// Click counter to 25.
+var totalClicks = 0;
+
+// Where the Product images will be located on the website.
+var container = document.getElementById('Product_container');
+var pictures = [document.getElementById('left'), 
+  document.getElementById('center'), 
+  document.getElementById('right')
+  ];
+var list = document.getElementById('Productlist');
+
+// Create constructor function for the Product images.
+function Catalog(name,filepath) {
+
+  this.filepath = filepath;/*`img/${name}.jpg`;*/
+
   this.name = name;
-  this.filetype= filetype;
+  this.votes = 0;
+
   this.views = 0;
-  allCatalog.push(this);
+
+  allProduct.push(this); 
+
 }
 
-new Catalog('bag');
-new Catalog('banana');
-new Catalog('bathroom');
-new Catalog('boots');
-new Catalog('breakfast');
-new Catalog('bubblegum');
-new Catalog('chair');
-new Catalog('cthulhu');
-new Catalog('dog-duck');
-new Catalog('dragon');
-new Catalog('pen');
-new Catalog('pet-sweep');
-new Catalog('scissors');
-new Catalog('shark');
-new Catalog('sweep');
-new Catalog('tauntaun');
-new Catalog('unicorn');
-new Catalog('usb');
-new Catalog('water-can');
-new Catalog('wine-glass');
 
 
+new Catalog('bag','img/bag.jpg');
+new Catalog('banana','img/banana.jpg');
+new Catalog('bathroom','img/bathroom.jpg');
+new Catalog('boots','img/boots.jpg');
+new Catalog('breakfast','img/breakfast.jpg');
+new Catalog('bubblegum','img/bubblegum.jpg');
+new Catalog('chair','img/chair.jpg');
+new Catalog('cthulhu','img/cthulhu.jpg');
+new Catalog('dog-duck','img/dog-duck.jpg');
+new Catalog('dragon','img/dragon.jpg');
+new Catalog('pen','img/pen.jpg');
+new Catalog('pet-sweep','img/pet-sweep.jpg');
+new Catalog('scissors','img/scissors.jpg');
+new Catalog('shark','img/shark.jpg');
+new Catalog('sweep','img/sweep.png');
+new Catalog ('tauntaun','img/tauntaun.jpg');
+new Catalog('unicorn','img/unicorn.jpg');
+new Catalog('usb','img/usb.gif');
+new Catalog('water-can','img/water-can.jpg');
+new Catalog('wine-glass','img/wine-glass.jpg');
 
-function showRandomCatalog() {
-  var random = Math.floor(Math.random() * allCatalog.length);
-  catalog.src = allCatalog[random].filepath;
-  catalog.alt = allCatalog[random].name;
-  catalog.title = allCatalog[random].name;
-  allCatalog[random].views++;
-  console.log('current catalog,', allCatalog[random]);
+
+// Function Declarations
+// Randomize the images.
+
+
+// Make sure we get 3 random pictures/indexes.
+function displayPictures() {
+  
+function makerandom() {
+	return Math.floor(Math.random() * allProduct.length);
 }
 
-showRandomCatalog();
+	while (viewed.length < 6) {
+		var random = makerandom();
+		while (!viewed.includes(random)) {
+			viewed.push(random);
+		}
+	}
+	for (var i = 0; i < 3; i++) {
+		var temp = viewed.shift()
+		// console.log(Product);
+		// console.log(Product.viewed);
+		pictures[i].src = allProduct[temp].filepath;
+    pictures[i].alt = allProduct[temp].name;
+		pictures[i].title = allProduct[temp].name;
+    allProduct[i].views += 1;
+    
+	}
+}
 
-catalog.addEventListener('click', handleClick);
+// function handler that keeps track of the clicks.
 function handleClick(event) {
-  
-    console.log('target, ', event.target);
-  
-  showRandomCatalog();
-  
+  pictures.addEventListener('click', handleClick);
+	// Let the user know if they didn't click on an image.
+	if (event.target === container) {
+    return alert('Be sure to click on an image.');}
+    else{
+      
+    }
+  }
+ 
+	totalClicks += 1;
+	console.log(totalClicks);
+	// remove the event listener.
+	if (totalClicks >= 25) {
+		container.removeEventListener('click', handleClick);
+		container.style.display = 'none';
+		showList();
+		createChart();
+
+	}
+	for (var i = 0; i < allProduct.length; i++) {
+		if (event.target.title === event.target.name) {
+			pictures[i].votes += 1;
+			console.log(event.target.alt + ' has ' + pictures[i].votes + ' votes in ' + pictures[i].views + ' views');
+		}
+	}
+	
+	
+	displayPictures();
+
+
+function showList() {
+	for (var i = 0; i < allProduct.length; i++) {
+		var liEl = document.createElement('li');
+		var conversion = (allProduct[i].votes / allProduct[i].views * 100).toFixed(1);
+		liEl.textContent = allProduct[i].name + ' has ' + allProduct[i].votes + ' votes in ' + allProduct[i].views + ' views, for a click-through conversion rate of ' + conversion + '%';
+
+		if (conversion > 49) {
+			liEl.style.color = 'white';
+			liEl.style.backgroundColor = "#2E89A7";
+		}
+
+		if (conversion < 30) {
+			liEl.style.color = 'white';
+			liEl.style.backgroundColor = 'red';
+		}
+
+		list.appendChild(liEl);
+	}
 }
 
+displayPictures();
+container.addEventListener('click', handleClick);
 
+for (var i = 0; i < Product.names.length; i++) {
+  votes[i] = allProduct[i].votes;
+}
+var ctx = document.getElementById("myBarChart").getContext('2d');
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["bag", "banana", "bathroom", "boots", "breakfast", "bubblegum", "chair", "cthulhu", "dog-duck", "dragon", "pen", "pet-sweep", "scissors", "shark", "sweep", "tauntaun", "unicorn", "usb", "water-can", "wine-glass"],
+        datasets: [{
+            label: "Total Votes Per Product",
+            data: votes,
+            fill: false,
+            backgroundColor: [
+            '#71BF4A',
+            '#2263AE',
+            '#43C4DD',
+            '#009E6D',
+          '#71BF4A',
+            '#2263AE',
+            '#43C4DD',
+            '#009E6D',
+          '#71BF4A',
+            '#2263AE',
+            '#43C4DD',
+            '#009E6D',
+          '#71BF4A',
+            '#2263AE',
+            '#43C4DD',
+            '#009E6D',
+          '#71BF4A',
+            '#2263AE',
+            '#43C4DD',
+            '#009E6D',
+          ],
+        }]
+    },}
+  );
 
