@@ -94,9 +94,9 @@ function handleClick(event) {
 
  
 	
-  // remove the event listener.
+  
   if (totalClicks >= 25) {
-		container.removeEventListener('click', handleClick);
+		
     container.style.display = 'none';
   }
 		 showList();
