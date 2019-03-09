@@ -72,8 +72,8 @@ function makerandom() {
 	}
 	for (var i = 0; i < 3; i++) {
 		var temp = viewed.shift()
-		// console.log(Product);
-		// console.log(Product.viewed);
+		// console.log(pictures);
+		// console.log(pictures.viewed);
 		pictures[i].src = allProduct[temp].filepath;
     pictures[i].alt = allProduct[temp].name;
 		pictures[i].title = allProduct[temp].name;
@@ -84,35 +84,37 @@ function makerandom() {
 
 // function handler that keeps track of the clicks.
 function handleClick(event) {
-  pictures.addEventListener('click', handleClick);
-	// Let the user know if they didn't click on an image.
-	if (event.target === container) {
-    return alert('Be sure to click on an image.');}
-    else{
-      
-    }
-  }
- 
+ // pictures[i].addEventListener('click', handleClick);
+  // Let the user know if they didn't click on an image.
+  if (event.target === container) {
+		return alert('Be sure to click on an image.');
+	}
 	totalClicks += 1;
 	console.log(totalClicks);
-	// remove the event listener.
-	if (totalClicks >= 25) {
-		container.removeEventListener('click', handleClick);
-		container.style.display = 'none';
-		showList();
-		createChart();
 
-	}
-	for (var i = 0; i < allProduct.length; i++) {
-		if (event.target.title === event.target.name) {
-			pictures[i].votes += 1;
-			console.log(event.target.alt + ' has ' + pictures[i].votes + ' votes in ' + pictures[i].views + ' views');
-		}
-	}
+ 
+	
+  // remove the event listener.
+  if (totalClicks >= 25) {
+		container.removeEventListener('click', handleClick);
+    container.style.display = 'none';
+  }
+		 showList();
+     createChart();
+    for (var i = 0; i < allProduct.length; i++) {
+      if (event.target.alt === allProduct[i].name) {
+        allProduct[i].votes += 1;
+        console.log(event.target.alt + ' has ' + allProduct[i].votes + ' votes in ' + allProduct[i].views + ' views');
+      }
+    }
+
+
+
+
 	
 	
 	displayPictures();
-
+  }
 
 function showList() {
 	for (var i = 0; i < allProduct.length; i++) {
@@ -130,14 +132,18 @@ function showList() {
 			liEl.style.backgroundColor = 'red';
 		}
 
-		list.appendChild(liEl);
+    list.appendChild(liEl);
+    
 	}
 }
 
 displayPictures();
-container.addEventListener('click', handleClick);
 
-for (var i = 0; i < Product.names.length; i++) {
+addEventListener('click', handleClick);
+
+function createChart() {
+  var votes = [];
+for (var i = 0; i < allProduct.length; i++) {
   votes[i] = allProduct[i].votes;
 }
 var ctx = document.getElementById("myBarChart").getContext('2d');
@@ -175,3 +181,4 @@ var myBarChart = new Chart(ctx, {
     },}
   );
 
+  }
