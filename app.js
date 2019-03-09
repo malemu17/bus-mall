@@ -109,10 +109,9 @@ function handleClick(event) {
     pictureTwo.addEventListener('click', handleClick);
     pictureThree.addEventListener('click', handleClick);
   }
-	// remove the event listener.
+	
 	if (totalClicks >= 25) {
-		container.removeEventListener('click', handleClick);
-		container.style.display = 'none';
+		
 		showList();
 		//createChart();
 
