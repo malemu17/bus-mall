@@ -94,7 +94,7 @@ function handleClick(event) {
 
  
 	
- 
+
   if (totalClicks >= 25) {
 		
     container.style.display = 'none';
