@@ -94,19 +94,33 @@ function handleClick(event) {
   }
  
 	totalClicks += 1;
-	console.log(totalClicks);
+  console.log(totalClicks);
+  function render(pictures) {
+    pictureOne.src = pictures[0].filepath;
+    pictureOne.title = pictures[0].displayName;
+  
+    pictureTwo.src = pictures[1].filepath;
+    pictureTwo.title = pictures[1].displayName;
+  
+    pictureThree.src = pictures[2].filepath;
+    pictureThree.title = pictures[2].displayName;
+  
+    pictureOne.addEventListener('click', handleClick);
+    pictureTwo.addEventListener('click', handleClick);
+    pictureThree.addEventListener('click', handleClick);
+  }
 	// remove the event listener.
 	if (totalClicks >= 25) {
 		container.removeEventListener('click', handleClick);
 		container.style.display = 'none';
 		showList();
-		createChart();
+		//createChart();
 
 	}
 	for (var i = 0; i < allProduct.length; i++) {
-		if (event.target.title === event.target.name) {
-			pictures[i].votes += 1;
-			console.log(event.target.alt + ' has ' + pictures[i].votes + ' votes in ' + pictures[i].views + ' views');
+		if (event.target.alt === allProduct[i].name) {
+			allProduct[i].votes += 1;
+			console.log(event.target.alt + ' has ' + allProduct[i].votes + ' votes in ' + allProduct[i].views + ' views');
 		}
 	}
 	
