@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,33 +8,40 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 </head>
 
 <body>
-    <header>A page with catalog of assorted high-markup products</header>  
-<main>
+    <header>A page with catalog of assorted high-markup products</header>
+    <main>
 
-    <h1>Click on the picture to see more products</h1>
+        <h1>Click on the picture to see more products</h1>
 
-    <section id="product-container" >
-      <img id="left" src=""  alt="" title="">
-      <img id="center" src=""  alt="" title="">
-      <img id="right" src=""  alt="" title="">
-   </section> 
-   <ul id="productlist"></ul> 
-   <canvas id="myBarChart" width="800" height="450"></canvas>
-	<form id="enter-to-win">
-		<fieldset>
-			<legend>Catalog List</legend>
+        <section id="product-container">
+            <img id="left" src="" alt="" name="">
+            <img id="center" src="" alt="" name="">
+            <img id="right" src="" alt="" name="">
+        </section>
+        <ul id="productlist"></ul>
+        <canvas id="myBarChart" width="800" height="450"></canvas>
+        <form id="check">
+            <fieldset>
+                <legend>Review our Catalog</legend>
 
-			<label for="emailAddress">Email Address</label>
-			<input name="emailAddress" type="text"></input>
+                <label for="emailAddress">Email Address</label>
+                <input name="emailAddress" type="text"></input>
 
-			<button type="submit">Click here to enter</button>
-		</fieldset>
-	</form>
+                <button type="submit">Click here to enter</button>
+            </fieldset>
+        </form>
 
-</main>
-<script src="app.js"> </script>
+    </main>
+    <footer>
+        <p>For your local Transit options, please visit one of these sites: </p>
+        <a href="https://www.communitytransit.org/">
+            <a href="https://soundtransit.org/">
+    </footer>
+    <script src="app.js"> </script>
 </body>
+
 </html>
