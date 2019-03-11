@@ -54,6 +54,23 @@ new Catalog('wine-glass', 'img/wine-glass.jpg');
 // Randomize the images.
 // Make sure we get 3 random pictures/indexes.
 
+// if (localStorage.saveAll) {
+//   console.log('localStorage');
+//   allProduct =localStorage.getItem('saveAll');
+//   allProduct = JSON.parse(allProduct);
+// } else {
+//   console.log('From scratch');
+// 	for (var i = 0; i < allProduct.length; i++) {
+// 		new Catalog(allProduct[i]);
+// 	}
+// }
+
+
+
+
+
+
+
 function displayPictures() {
   function makerandom() {
     return Math.floor(Math.random() * allProduct.length);
@@ -90,26 +107,35 @@ function handleClick(event) {
   if (totalClicks >= 25) {
     for (var i = 0; i < 3; i++) {
       pictures[i].removeEventListener('click', handleClick);
+     //container.removeEventListener('click', handleClick);
       pictures[i].style.display = 'none';
+      
     }
     //  container.removeEventListener('click', handleClick);
     // 	container.style.display = 'none';
-    showList();
+    //showList();
     createChart();
   }
 
-  displayPictures();
+  //displayPictures();
 
   for (var i = 0; i < allProduct.length; i++) {
-    console.log(event.target.alt, "compare", allProduct[i].name);
+   // console.log(event.target.alt, "compare", allProduct[i].name);
     if (event.target.alt === allProduct[i].name) {
       allProduct[i].votes += 1;
-      console.log(event.target.name + ' has ' + allProduct[i].votes + ' votes in ' + allProduct[i].views + ' views');
+      console.log(event.target.alt + ' has ' + allProduct[i].votes + ' votes in ' + allProduct[i].views + ' views');
     }
   }
+  // var stringifytotalClicks = JSON.stringify(allProduct);
+	// localStorage.setItem('saveAll', stringifytotalClicks);
+	
+	displayPictures();
+
 }
 
-displayPictures();
+
+
+
 
 
 function showList() {
