@@ -4,11 +4,17 @@
     */
     /* base styles */
     body {
-      font-family: helvetica;
+      background-color: #FFF;
+      width: 100%;
+      margin: 30px auto;
+      font-size:20; 
+      text-align: center;
+      font-family: 'Bree Serif', serif;
     }
-
-    body {
-      background-color:#874642;
+    
+    h1 {
+      text-align: center;
+      color: #2263AE;
     }
     img {
       border: 3px solid #009e6d;
@@ -20,9 +26,25 @@
     }
     #product-container {
       background-color: #43C4DD;
-      padding-top: 10px;
+      padding-top: 30px;
       padding-bottom: 5px;
       text-align: center;
       width: 960px;
       margin: 0 auto;
     }
+    
+    li {
+      list-style: none;
+      padding: 5px;
+      border-radius: 25px;
+     margin-left:15px;
+      width: 960px;
+      margin: 1.5%;
+      vertical-align: middle;
+    }
+    
+    footer {
+      padding-top: 5px;
+      border-top: 10px solid #71BF4A;
+    }
+    
