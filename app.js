@@ -17,7 +17,7 @@ var list = document.getElementById('productlist');
 
 function Catalog(name, filepath) {
 
-  this.filepath = filepath;/*`img/${name}.jpg`;*/
+  this.filepath = filepath; /*`img/${name}.jpg`; */
 
   this.name = name;
   this.votes = 0;
@@ -50,38 +50,37 @@ new Catalog('water-can', 'img/water-can.jpg');
 new Catalog('wine-glass', 'img/wine-glass.jpg');
 
 
+
+if (localStorage.saveAll) {
+  console.log('localStorage');
+  var allCatalog = localStorage.getItem('saveAll');
+  var allCatalog = JSON.parse(allCatalog);
+  console.log(allCatalog[i]);
+} else {
+  console.log('From scratch');
+  for (var i = 0; i < allCatalog.length; i++) {
+    new Catalog(allCatalog[i]);
+  }
+
+}
+
 // Function Declarations
 // Randomize the images.
 // Make sure we get 3 random pictures/indexes.
 
-// if (localStorage.saveAll) {
-//   console.log('localStorage');
-//   allProduct =localStorage.getItem('saveAll');
-//   allProduct = JSON.parse(allProduct);
-// } else {
-//   console.log('From scratch');
-// 	for (var i = 0; i < allProduct.length; i++) {
-// 		new Catalog(allProduct[i]);
-// 	}
-// }
-
-
-
-
-
-
-
 function displayPictures() {
+
   function makerandom() {
     return Math.floor(Math.random() * allProduct.length);
   }
-
   while (viewed.length < 6) {
     var random = makerandom();
     while (!viewed.includes(random)) {
       viewed.push(random);
     }
   }
+
+
   for (var i = 0; i < 3; i++) {
     var temp = viewed.shift()
     console.log(temp);
@@ -92,7 +91,6 @@ function displayPictures() {
 
   }
 }
-
 
 //function handler that keeps track of the clicks.
 
@@ -107,34 +105,31 @@ function handleClick(event) {
   if (totalClicks >= 25) {
     for (var i = 0; i < 3; i++) {
       pictures[i].removeEventListener('click', handleClick);
-     //container.removeEventListener('click', handleClick);
+      //container.removeEventListener('click', handleClick);
       pictures[i].style.display = 'none';
-      
+
     }
-    //  container.removeEventListener('click', handleClick);
-    // 	container.style.display = 'none';
-    //showList();
+
+    showList();
     createChart();
   }
 
-  //displayPictures();
+  displayPictures();
 
   for (var i = 0; i < allProduct.length; i++) {
-   // console.log(event.target.alt, "compare", allProduct[i].name);
+    // console.log(event.target.alt, "compare", allProduct[i].name);
     if (event.target.alt === allProduct[i].name) {
       allProduct[i].votes += 1;
       console.log(event.target.alt + ' has ' + allProduct[i].votes + ' votes in ' + allProduct[i].views + ' views');
     }
   }
-  // var stringifytotalClicks = JSON.stringify(allProduct);
-	// localStorage.setItem('saveAll', stringifytotalClicks);
-	
-	displayPictures();
 
 }
 
 
-
+var stringifytotalClicks = JSON.stringify(allProduct);
+localStorage.setItem('saveAll', stringifytotalClicks);
+displayPictures();
 
 
 
@@ -166,6 +161,8 @@ displayPictures();
 for (var i = 0; i < 3; i++) {
   pictures[i].addEventListener('click', handleClick);
 }
+
+
 
 function createChart() {
   var votes = [];
