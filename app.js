@@ -5,7 +5,6 @@
 
 var allProduct = [];
 var viewed = [];
-var Product= [('bag.jpg', 'img/bag.jpg') ,( 'banana.jpg', 'img/banana.jpg'), ('bathroom.jpg','img/bathroom.jpg' ),('boots.jpg', 'img/boots.jpg'), ('breakfast.jpg', 'img/breakfast.jpg'), ('bubblegum.jpg','img/bubblegum.jpg' ),('chair.jpg','img/chair.jpg'), ('cthulhu.jpg','img/cthulhu.jpg' ), ( 'dog-duck.jpg','img/dog-duck.jpg' ), ('dragon.jpg', 'img/dragon.jpg'),('pen.jpg','img/pen.jpg' ), ('pet-sweep.jpg','img/pet-sweep.jpg'), ('scissors.jpg','img/scissors.jpg' ), ('shark.jpg','img/shark.jpg'), ('sweep.png','img/sweep.png' ),('tauntaun.jpg','img/tauntaun.jpg'),('unicorn.jpg','img/unicorn.jpg'), ('usb.gif','img/usb.gif'),('water-can.jpg','img/water-can.jpg' ), ('wine-glass.jpg','img/wine-glass.jpg')];
 
 // Click counter to 25.
 
@@ -57,16 +56,16 @@ new Catalog('wine-glass', 'img/wine-glass.jpg');
 
 if (localStorage.saveAll) {
   console.log('localStorage');
-  var Product= localStorage.getItem('saveAll');
-  var Catalog= JSON.parse(Product);
+  var allProduct = localStorage.getItem('saveAll');
+  var allProduct = JSON.parse(allProduct);
   //console.log(Product[i]);
 } else {
   console.log('From scratch');
-  for (var i = 0; i < namesProduct.length; i++) {
-    new Catalog(namesProduct[i]);
-  }
-
+  // for (var i = 0; i < namesProduct.length; i++) {
+  var allProduct = new Catalog(name, filepath);
 }
+console.log(allProduct);
+
 
 // Function Declarations
 // Randomize the images.
@@ -95,8 +94,6 @@ function displayPictures() {
 
   }
 }
-
-
 
 function handleClick(event) {
 
