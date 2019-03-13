@@ -2,9 +2,13 @@
 'use strict'
 
 //  main array
+
 var allProduct = [];
 var viewed = [];
+var Product= [('bag.jpg', 'img/bag.jpg') ,( 'banana.jpg', 'img/banana.jpg'), ('bathroom.jpg','img/bathroom.jpg' ),('boots.jpg', 'img/boots.jpg'), ('breakfast.jpg', 'img/breakfast.jpg'), ('bubblegum.jpg','img/bubblegum.jpg' ),('chair.jpg','img/chair.jpg'), ('cthulhu.jpg','img/cthulhu.jpg' ), ( 'dog-duck.jpg','img/dog-duck.jpg' ), ('dragon.jpg', 'img/dragon.jpg'),('pen.jpg','img/pen.jpg' ), ('pet-sweep.jpg','img/pet-sweep.jpg'), ('scissors.jpg','img/scissors.jpg' ), ('shark.jpg','img/shark.jpg'), ('sweep.png','img/sweep.png' ),('tauntaun.jpg','img/tauntaun.jpg'),('unicorn.jpg','img/unicorn.jpg'), ('usb.gif','img/usb.gif'),('water-can.jpg','img/water-can.jpg' ), ('wine-glass.jpg','img/wine-glass.jpg')];
+
 // Click counter to 25.
+
 var totalClicks = 0;
 var container = document.getElementById('Product_container');
 var pictures = [document.getElementById('left'),
@@ -53,13 +57,13 @@ new Catalog('wine-glass', 'img/wine-glass.jpg');
 
 if (localStorage.saveAll) {
   console.log('localStorage');
-  var allCatalog = localStorage.getItem('saveAll');
-  var allCatalog = JSON.parse(allCatalog);
-  console.log(allCatalog[i]);
+  var Product= localStorage.getItem('saveAll');
+  var Catalog= JSON.parse(Product);
+  //console.log(Product[i]);
 } else {
   console.log('From scratch');
-  for (var i = 0; i < allCatalog.length; i++) {
-    new Catalog(allCatalog[i]);
+  for (var i = 0; i < namesProduct.length; i++) {
+    new Catalog(namesProduct[i]);
   }
 
 }
@@ -92,20 +96,20 @@ function displayPictures() {
   }
 }
 
-//function handler that keeps track of the clicks.
+
 
 function handleClick(event) {
-  // Let the user know if they didn't click on an image.
+
   if (event.target === container) {
     return alert('Be sure to click on an image.');
   }
   totalClicks += 1;
   console.log(totalClicks);
-  // Make sure that we have a way to remove the event listener.
+
   if (totalClicks >= 25) {
     for (var i = 0; i < 3; i++) {
       pictures[i].removeEventListener('click', handleClick);
-      //container.removeEventListener('click', handleClick);
+
       pictures[i].style.display = 'none';
 
     }
@@ -117,7 +121,7 @@ function handleClick(event) {
   displayPictures();
 
   for (var i = 0; i < allProduct.length; i++) {
-    // console.log(event.target.alt, "compare", allProduct[i].name);
+
     if (event.target.alt === allProduct[i].name) {
       allProduct[i].votes += 1;
       console.log(event.target.alt + ' has ' + allProduct[i].votes + ' votes in ' + allProduct[i].views + ' views');
@@ -168,7 +172,7 @@ function createChart() {
   var votes = [];
   for (var i = 0; i < allProduct.length; i++) {
     votes[i] = allProduct[i].votes;
-    // votes[i] = 5;
+
   }
   var ctx = document.getElementById("myBarChart").getContext('2d');
   var myBarChart = new Chart(ctx, {
