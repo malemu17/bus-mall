@@ -2,9 +2,12 @@
 'use strict'
 
 //  main array
+
 var allProduct = [];
 var viewed = [];
+
 // Click counter to 25.
+
 var totalClicks = 0;
 var container = document.getElementById('Product_container');
 var pictures = [document.getElementById('left'),
@@ -50,6 +53,15 @@ new Catalog('water-can', 'img/water-can.jpg');
 new Catalog('wine-glass', 'img/wine-glass.jpg');
 
 
+if (localStorage.saveAll) {
+  console.log('localStorage');
+  allProduct =localStorage.getItem('saveAll');
+  allProduct = JSON.parse(allProduct);
+} else {
+  console.log('From scratch');
+	var allProduct =	new Catalog(name, filepath);
+  }
+console.log(allProduct);
 // Function Declarations
 // Randomize the images.
 // Make sure we get 3 random pictures/indexes.
@@ -76,7 +88,6 @@ function displayPictures() {
   }
 }
 
-
 //function handler that keeps track of the clicks.
 
 function handleClick(event) {
@@ -101,13 +112,17 @@ function handleClick(event) {
   displayPictures();
 
   for (var i = 0; i < allProduct.length; i++) {
-    console.log(event.target.alt, "compare", allProduct[i].name);
+   // console.log(event.target.alt, "compare", allProduct[i].name);
     if (event.target.alt === allProduct[i].name) {
       allProduct[i].votes += 1;
       console.log(event.target.name + ' has ' + allProduct[i].votes + ' votes in ' + allProduct[i].views + ' views');
     }
   }
 }
+
+var stringifyTotalClicks = JSON.stringify(allProduct);
+localStorage.setItem('saveAll', stringifyTotalClicks);
+
 
 displayPictures();
 
@@ -145,7 +160,7 @@ function createChart() {
   var votes = [];
   for (var i = 0; i < allProduct.length; i++) {
     votes[i] = allProduct[i].votes;
-    // votes[i] = 5;
+    
   }
   var ctx = document.getElementById("myBarChart").getContext('2d');
   var myBarChart = new Chart(ctx, {
