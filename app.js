@@ -1,10 +1,10 @@
 
 'use strict'
 
-//  main array
+
 var allProduct = [];
 var viewed = [];
-// Click counter to 25.
+
 var totalClicks = 0;
 var container = document.getElementById('Product_container');
 var pictures = [document.getElementById('left'),
@@ -12,8 +12,6 @@ document.getElementById('center'),
 document.getElementById('right')
 ];
 var list = document.getElementById('productlist');
-
-// Create constructor function for the Product images.
 
 function Catalog(name, filepath) {
 
@@ -50,10 +48,6 @@ new Catalog('water-can', 'img/water-can.jpg');
 new Catalog('wine-glass', 'img/wine-glass.jpg');
 
 
-// Function Declarations
-// Randomize the images.
-// Make sure we get 3 random pictures/indexes.
-
 function displayPictures() {
   function makerandom() {
     return Math.floor(Math.random() * allProduct.length);
@@ -76,24 +70,20 @@ function displayPictures() {
   }
 }
 
-
-//function handler that keeps track of the clicks.
-
 function handleClick(event) {
-  // Let the user know if they didn't click on an image.
+
   if (event.target === container) {
     return alert('Be sure to click on an image.');
   }
   totalClicks += 1;
   console.log(totalClicks);
-  // Make sure that we have a way to remove the event listener.
+
   if (totalClicks >= 25) {
     for (var i = 0; i < 3; i++) {
       pictures[i].removeEventListener('click', handleClick);
       pictures[i].style.display = 'none';
     }
-    //  container.removeEventListener('click', handleClick);
-    // 	container.style.display = 'none';
+
     showList();
     createChart();
   }
@@ -145,7 +135,7 @@ function createChart() {
   var votes = [];
   for (var i = 0; i < allProduct.length; i++) {
     votes[i] = allProduct[i].votes;
-    // votes[i] = 5;
+
   }
   var ctx = document.getElementById("myBarChart").getContext('2d');
   var myBarChart = new Chart(ctx, {
