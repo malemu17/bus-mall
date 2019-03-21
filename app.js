@@ -20,14 +20,15 @@ var list = document.getElementById('productlist');
 
 function Catalog(name, filepath) {
 
-  this.filepath = filepath;/*`img/${name}.jpg`;*/
-
+  this.filepath = filepath; /*`img/${name}.jpg`;*/
+  //this.filepath= 'img/'+ name;
   this.name = name;
   this.votes = 0;
 
   this.views = 0;
 
   allProduct.push(this);
+  //persit data in local storage
 
 }
 
@@ -55,13 +56,15 @@ new Catalog('wine-glass', 'img/wine-glass.jpg');
 
 if (localStorage.saveAll) {
   console.log('localStorage');
-  allProduct =localStorage.getItem('saveAll');
-  allProduct = JSON.parse(allProduct);
+  allProduct = localStorage.getItem('saveAll');
+  var allProduct = JSON.parse(this.allProduct);
+  //console.log(this.allProduct);
 } else {
   console.log('From scratch');
-	var allProduct =	new Catalog(name, filepath);
+  for (var i = 0; i < allProduct.length; i++) {
+    allProduct = this.allProduct;
   }
-console.log(allProduct);
+}
 // Function Declarations
 // Randomize the images.
 // Make sure we get 3 random pictures/indexes.
@@ -112,16 +115,20 @@ function handleClick(event) {
   displayPictures();
 
   for (var i = 0; i < allProduct.length; i++) {
-   // console.log(event.target.alt, "compare", allProduct[i].name);
+    // console.log(event.target.alt, "compare", allProduct[i].name);
     if (event.target.alt === allProduct[i].name) {
       allProduct[i].votes += 1;
       console.log(event.target.name + ' has ' + allProduct[i].votes + ' votes in ' + allProduct[i].views + ' views');
     }
   }
 }
+displayPictures();
+
 
 var stringifyTotalClicks = JSON.stringify(allProduct);
 localStorage.setItem('saveAll', stringifyTotalClicks);
+
+
 
 
 displayPictures();
@@ -160,7 +167,7 @@ function createChart() {
   var votes = [];
   for (var i = 0; i < allProduct.length; i++) {
     votes[i] = allProduct[i].votes;
-    
+
   }
   var ctx = document.getElementById("myBarChart").getContext('2d');
   var myBarChart = new Chart(ctx, {
