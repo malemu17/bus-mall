@@ -28,8 +28,8 @@ function Catalog(name, filepath) {
   this.views = 0;
 
   allProduct.push(this);
+  
   //persit data in local storage
-
 }
 
 new Catalog('bag', 'img/bag.jpg');
@@ -54,15 +54,15 @@ new Catalog('water-can', 'img/water-can.jpg');
 new Catalog('wine-glass', 'img/wine-glass.jpg');
 
 
-if (localStorage.saveAll) {
-  console.log('localStorage');
-  allProduct = localStorage.getItem('saveAll');
-  var allProduct = JSON.parse(this.allProduct);
-  //console.log(this.allProduct);
+  if (localStorage.saveAll) {
+console.log('localStorage');
+var allProduct = localStorage.getItem('saveAll');
+allProduct = JSON.parse(allProduct);
+ //console.log(allProduct);
 } else {
   console.log('From scratch');
   for (var i = 0; i < allProduct.length; i++) {
-    allProduct = this.allProduct;
+    allProduct.push(this)
   }
 }
 // Function Declarations
@@ -90,6 +90,7 @@ function displayPictures() {
 
   }
 }
+displayPictures();
 
 //function handler that keeps track of the clicks.
 
@@ -106,13 +107,12 @@ function handleClick(event) {
       pictures[i].removeEventListener('click', handleClick);
       pictures[i].style.display = 'none';
     }
-    //  container.removeEventListener('click', handleClick);
-    // 	container.style.display = 'none';
+   
     showList();
     createChart();
   }
-
-  displayPictures();
+ 
+ displayPictures();
 
   for (var i = 0; i < allProduct.length; i++) {
     // console.log(event.target.alt, "compare", allProduct[i].name);
@@ -124,12 +124,10 @@ function handleClick(event) {
 }
 displayPictures();
 
-
 var stringifyTotalClicks = JSON.stringify(allProduct);
 localStorage.setItem('saveAll', stringifyTotalClicks);
 
-
-
+  
 
 displayPictures();
 
@@ -162,6 +160,8 @@ displayPictures();
 for (var i = 0; i < 3; i++) {
   pictures[i].addEventListener('click', handleClick);
 }
+
+
 
 function createChart() {
   var votes = [];
